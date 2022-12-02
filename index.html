@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>BUSCADOR DE CEP</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="APP BUSCADOR DE CEP" />
+    <meta content="images/icon4.fw.png" property="og:image" />
+    <meta content="images/icon4.fw.png" name="twitter:image" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="BUSCADOR DE CEP" />
+    <meta name="apple-mobile-web-app-title" content="BUSCADOR DE CEP" />
+    <meta name="theme-color" content="#D9D900" />
+    <meta name="msapplication-navbutton-color" content="#D9D900" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" type="image/png" sizes="96x96" href="./images/icon4.fw.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="96x96" href="./images/icon4.fw.png" />
+    <link rel="icon" type="image/png" sizes="72x72" href="./images/icon3.fw.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="./images/icon3.fw.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="./images/icon2.fw.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="48x48" href="./images/icon2.fw.png" />
+    <link rel="icon" type="image/png" sizes="36x36" href="./images/icon1.fw.png" />
+    <link rel="apple-touch-icon" type="image/png" sizes="36x36" href="./images/icon1.fw.png" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/loading-bar.css" />
+    <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less" />
+    <script src="js/angular.min.js"></script>
+    <script src="js/loading-bar.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/init-app.js"></script>
+    <script src="xdk/init-dev.js"></script>
+    <script type="application/javascript" src="lib/jquery.min.js"></script>
+    <script type="application/javascript" src="marginal/marginal-position.min.js"></script>
+    <script type="application/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body ng-app="MyApp" ng-controller="MyCtrl">
+
+    <div class="upage" id="mainpage">
+        <div class="upage-outer">
+            <div class="uib-header header-bg container-group inner-element uib_w_1 uib-header-fixed header-format"
+                data-uib="layout/header" data-ver="0">
+                <h2>BUSCADOR DE CEP</h2>
+                <div class="widget-container wrapping-col single-centered"></div>
+                <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                <div class="widget-container content-area horiz-area wrapping-col right"></div>
+            </div>
+            <div class="upage-content ac0 content-area vertical-col left" id="page_81_88">
+                <div class="widget uib_w_2 scale-image d-margins" data-uib="media/img" data-ver="0">
+                    <figure class="figure-align">
+                        <img style="padding: 13px 0px 10px;" src="images/location.png">
+                        <figcaption data-position="bottom"></figcaption>
+                    </figure>
+                </div>
+                <div class="table-thing widget uib_w_3 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                    <label class="narrow-control"></label>
+                    <input class="wide-control form-control default input-lg" type="number" placeholder="Digite um CEP"
+                        ng-model="cep" />
+                </div>
+                <button class="btn widget uib_w_4 d-margins btn-lg btn-default btn-buscar"
+                    data-uib="twitter%20bootstrap/button" data-ver="1" ng-click="buscar(cep)">Buscar</button>
+
+                <div class="list-group widget uib_w_5 d-margins" data-uib="twitter%20bootstrap/list_group" data-ver="1">
+
+                    <a class="list-group-item allow-badge widget uib_w_6" data-uib="twitter%20bootstrap/list_item"
+                        data-ver="1" ng-show="listaResultado">
+                        <h4 class="list-group-item-heading"><b>Resultado:</b> {{lista.resultado_txt}}</h4>
+                    </a>
+
+                    <a class="list-group-item allow-badge widget uib_w_6" data-uib="twitter%20bootstrap/list_item"
+                        data-ver="1" ng-show="listaResultado">
+                        <h4 class="list-group-item-heading"><b>Cidade:</b> {{lista.cidade}}</h4>
+                    </a>
+
+                    <a class="list-group-item allow-badge widget uib_w_6" data-uib="twitter%20bootstrap/list_item"
+                        data-ver="1" ng-show="listaResultado">
+                        <h4 class="list-group-item-heading"><b>Bairro:</b> {{lista.bairro}}</h4>
+                    </a>
+
+                    <a class="list-group-item allow-badge widget uib_w_6" data-uib="twitter%20bootstrap/list_item"
+                        data-ver="1" ng-show="listaResultado">
+                        <h4 class="list-group-item-heading"><b>Logradouro:</b> {{lista.logradouro}}</h4>
+                    </a>
+
+                    <a class="list-group-item allow-badge widget uib_w_6" data-uib="twitter%20bootstrap/list_item"
+                        data-ver="1" ng-show="listaResultado">
+                        <h4 class="list-group-item-heading"><b>Tipo de logradouro:</b> {{lista.tipo_logradouro}}</h4>
+                    </a>
+
+                    <a class="list-group-item allow-badge widget uib_w_6" data-uib="twitter%20bootstrap/list_item"
+                        data-ver="1" ng-show="listaResultado">
+                        <h4 class="list-group-item-heading"><b>Resultado:</b> {{lista.resultado}}</h4>
+                    </a>
+
+                    <a class="list-group-item allow-badge widget uib_w_6" data-uib="twitter%20bootstrap/list_item"
+                        data-ver="1" ng-show="listaResultado">
+                        <h4 class="list-group-item-heading"><b>Uf:</b> {{lista.uf}}</h4>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
